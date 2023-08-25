@@ -5,7 +5,7 @@ fetch("https://kea-alt-del.dk/t7/api/products/1525")
 
 function showProduct(product) {
   console.log(product);
-  document.querySelector("purchaseBox h2").textContent = product.productdisplayname;
+  document.querySelector("purchaseBox").textContent = product.productdisplayname;
 }
 
 /***
