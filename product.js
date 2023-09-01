@@ -1,11 +1,24 @@
-/** https:/ / kea - alt - del.dk / t7 / api / products / 1525; */
-fetch("https://kea-alt-del.dk/t7/api/products/1525")
+const urlParams = new URLSearchParams(window.location.search);
+const id = urlParams.get("id");
+
+fetch("https://kea-alt-del.dk/t7/api/products/" + id)
   .then((response) => response.json())
   .then((data) => showProduct(data));
 
 function showProduct(product) {
   console.log(product);
-  document.querySelector("purchaseBox").textContent = product.productdisplayname;
+
+  const template = document.querySelector("#productTemplate").content;
+  //lav kopi
+  const copy = template.cloneNode(true);
+
+  copy.querySelector(".purchaseBox h2").textContent = product.productdisplayname;
+  copy.querySelector(".purchaseBox h1").textContent = product.brandname;
+  copy.querySelector(".purchaseBox h3 span").textContent = product.price;
+
+  copy.querySelector("img").src = `https://kea-alt-del.dk/t7/images/webp/640/${product.id}.webp`;
+
+  document.querySelector("main section").appendChild(copy);
 }
 
 /***
